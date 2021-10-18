@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { plainToClass } from "class-transformer";
-import { Repository } from "typeorm";
+import { Like, Repository } from "typeorm";
 import { Cat } from "./entities/cat.entity";
 
 import * as mockData from "./mock-data.json";
@@ -20,6 +20,6 @@ export class CatsService {
   }
 
   findAll() {
-    return this.catsRepository.find();
+    return this.catsRepository.find({ where: { name: Like("%a%") } });
   }
 }
